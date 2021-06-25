@@ -1,11 +1,12 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import * as queryString from "query-string";
+import axios from "axios";
 
 export default function Auth() {
   const { typeAuth } = useParams();
 
-  useEffect((typeAuth) => {
+  useEffect(() => {
     switch (typeAuth) {
       case "google":
         getTheGoogleCode()
@@ -16,19 +17,23 @@ export default function Auth() {
     }
   }, [typeAuth])
 
-  const getTheGoogleCode = () => {
+  const getTheGoogleCode = async () => {
     const urlParams = queryString.parse(window.location.search);
-
+    
+    if (Object.keys(urlParams).length === 0) return window.close()
     if (urlParams.error) {
       alert(`An error occurred: ${urlParams.error}`);
     } else {
-      alert(`The code is: ${urlParams.code}`);
+      const {data} = await axios({
+        url: `https://relioapi.amydin.site/api/v1/user/auth/google?code=${urlParams.code}`,
+        method: "get",
+      })
+      alert(JSON.stringify(data))
     }
-
     window.close()
   }
 
   return (
-    <h2>Please wait...</h2>
+    <p>Please wait...</p>
   )
 }

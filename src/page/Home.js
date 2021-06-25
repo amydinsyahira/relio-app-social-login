@@ -4,7 +4,7 @@ import logo from "./logo.svg";
 import "./Home.css";
 
 export default function Home() {
-  const [googleLoginUrl, setGoogleLoginUrl] = useState("#")
+  const [googleLoginUrl, setGoogleLoginUrl] = useState('')
 
   useEffect(() => {
     getGoogleLoginUrl()
@@ -23,6 +23,8 @@ export default function Home() {
   }
 
   const popUpLogin = (type) => {
+    if (!googleLoginUrl) return
+
     switch (type) {
       case "google":
         window.open(googleLoginUrl, 'popup', 'width=600,height=600')
