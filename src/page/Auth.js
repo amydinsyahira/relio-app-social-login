@@ -25,7 +25,7 @@ export default function Auth() {
       alert(`An error occurred: ${urlParams.error}`);
     } else {
       const {data} = await axios({
-        url: `https://relioapi.amydin.site/api/v1/user/auth/google?code=${urlParams.code}`,
+        url: `https://api.relio.app/api/v1/user/auth/google?code=${urlParams.code}`,
         method: "get",
       })
       alert(JSON.stringify(data))

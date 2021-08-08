@@ -13,7 +13,7 @@ export default function Home() {
   const getGoogleLoginUrl = async () => {
     try {
       const {data} = await axios({
-        url: "https://relioapi.amydin.site/api/v1/user/login/url",
+        url: "https://api.relio.app/api/v1/user/login/url",
         method: "get",
       })
       setGoogleLoginUrl(data.googleUrl)
